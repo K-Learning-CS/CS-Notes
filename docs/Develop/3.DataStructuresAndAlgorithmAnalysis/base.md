@@ -21,7 +21,7 @@
 
 ## 二、对数
 
-仅当 logxB=A 时 x^A=B
+仅当 `logxB=A` 时 `x^A=B`
 
 在 logxB=A 表达式中，x: 底数，B: 真数，A: 以x为底B的对数
 
