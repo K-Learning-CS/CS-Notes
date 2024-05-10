@@ -37,6 +37,10 @@ type node struct {
 	Element  int
 	Position *node
 }
+// Newnode 初始化一个node
+func newNode() *node {
+    return &node{Position: nil}
+}
 ```
 
 然后我们增加一个方法，用来插入节点
@@ -67,3 +71,68 @@ func main() {
 它的构成如下图
 
 ![img.png](../../imgs/dev-dsaaa-list-1.png)
+
+我们补完它的一些常用方法
+
+```go
+// IsEmpty 判断node是否为空
+func (r *node) IsEmpty() bool {
+	return r.Position == nil
+}
+
+// Find 查找到node并返回node指针˜
+func (r *node) Find(n int) *node {
+	temp := r.Position
+
+	for temp.Position != nil && temp.Element != n {
+		temp = temp.Position
+	}
+	if temp.Element == n {
+		return temp
+	}
+	return nil
+}
+
+// FindPrevious 查找到node 返回前一个node指针
+func (r *node) FindPrevious(n int) *node {
+	temp := r
+
+	for temp.Position != nil && temp.Position.Element != n {
+		temp = temp.Position
+	}
+
+	if temp.Position != nil && temp.Position.Element == n {
+		return temp
+	}
+	return nil
+}
+// Delete 删除节点
+func (r *node) Delete(n int) {
+	temp := r.FindPrevious(n)
+	if temp != nil {
+		temp.Position = temp.Position.Position
+	} else {
+		println("Not in list")
+	}
+}
+// ListNode 遍历节点
+func (r *node) ListNode() {
+	temp := r.Position
+	for temp.Position != nil {
+		fmt.Printf("%d", temp.Element)
+		temp = temp.Position
+	}
+	println(temp.Element)
+}
+
+// Insert 将元素添加至给定元素后
+func (r *node) Insert(n int, p *node) {
+	temp := newNode()
+	temp.Element = n
+
+	if p != nil {
+		temp.Position = p.Position
+		p.Position = temp
+	}
+}
+```
