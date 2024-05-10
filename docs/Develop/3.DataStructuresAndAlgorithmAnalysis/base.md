@@ -5,10 +5,10 @@
 
 $X^AX^B = X^{A+B}$
 ```math
-(X^A) / (X^B) = X^(A-B)
+X^A/ X^B = X^{A-B}
 ```
 ```math
-(X^A)^B = X^AB
+{X^A}^B = X^AB
 ```
 ```math
 (X^N) + (X^N) = 2*(X^N) != X^(2N)
