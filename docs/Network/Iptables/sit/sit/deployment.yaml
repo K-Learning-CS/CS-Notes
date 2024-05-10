@@ -1,0 +1,126 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: fpc-opd-admin
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      name: fpc-opd-admin
+  strategy:
+    canary:
+      steps:
+      - setWeight: 80
+      - pause: {duration: 10}
+  template:
+    metadata:
+      labels:
+        name: fpc-opd-admin
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      containers:
+        - name: fpc-opd-admin
+          image: "192.168.108.2/test/fpc-opd-admin:1.0-sit"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /opt/bitnami/openresty/nginx/conf/server_blocks/
+              name: conf
+            - mountPath: /opt/bitnami/openresty/nginx/logs/
+              name: logs-storage
+            - mountPath: /opt/bitnami/openresty/nginx/conf/nginx.conf
+              name: nginx
+              subPath: nginx.conf
+            - name: timezone
+              mountPath: /etc/localtime
+              readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /check
+              port: 9145
+              scheme: HTTP
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          startupProbe:
+            httpGet:
+              path: /check
+              port: 9145
+              scheme: HTTP
+            failureThreshold: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /check
+              port: 9145
+              scheme: HTTP
+            failureThreshold: 3
+            periodSeconds: 6
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            requests:
+              memory: "1024Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "1000m"
+        - name: filebeat
+          image: 192.168.108.2/ops/filebeat:7.13.0
+          args: [
+            "-c", "/etc/filebeat/filebeat-kafka.yml",
+            "-e",
+          ]
+          ports:
+            - containerPort: 5678
+              protocol: TCP
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          livenessProbe:
+            tcpSocket:
+              port: 5678
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          volumeMounts:
+          - name: filebeat
+            mountPath: /etc/filebeat/
+          - name: logs-storage
+            mountPath: /logs
+          - name: timezone
+            mountPath: /etc/localtime
+            readOnly: true
+      volumes:
+        - name: update
+          configMap:
+            name: update
+        - name: conf
+          configMap:
+            name: conf
+        - name: nginx
+          configMap:
+            name: nginx
+        - name: filebeat
+          secret:
+            secretName: filebeat-secret
+        - name: logs-storage
+          emptyDir: {}
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai

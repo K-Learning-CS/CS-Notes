@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: PrefixSuffixTransformer
+metadata:
+  name: customsuffixer
+suffix: "-afsjdo5"
+fieldSpecs:
+- kind: ConfigMap
+  path: metadata/name
+- kind: Secret
+  path: metadata/name

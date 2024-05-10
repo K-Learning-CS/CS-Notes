@@ -1,0 +1,45 @@
+filebeat:
+  inputs:
+    -
+      paths:
+        - /logs/*.log
+      ignore_older: 1h #1小时
+      force_close_files: true #强制filebeat在文件名改变时，关闭文件，会有丢失日志的风险
+      close_older: 1m #1分钟
+      fields_under_root: true
+      fields:
+        type: hospital_sit_nginx
+        format_tag: nginx
+
+output:
+    kafka:
+      enabled: true
+      # username: admin
+      # password: admin
+      hosts: ["kafka.logging.svc.cluster.local:9092"]
+      topic: "%{[type]}"
+      version: "2.0.0"
+      partition.round_robin:
+        reachable_only: false
+      worker: 2
+      max_retries: 3
+      bulk_max_size: 2048
+      timeout: 30s
+      broker_timeout: 10s
+      channel_buffer_size: 256
+      keep_alive: 60
+      compression: gzip
+      max_message_bytes: 1000000
+      required_acks: 1
+
+
+logging:
+  to_files: true
+  files:
+    path: /tmp/
+    rotateeverybytes: 10485760 # = 10MB
+  level: info
+http:
+  enabled: true
+  host: 0.0.0.0
+  port: 5678

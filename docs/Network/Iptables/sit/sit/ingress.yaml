@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fpc-opd-admin
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: console-opd2sit-r3nmo9ycuuh82cyifm.rsjitcm.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: fpc-opd-admin
+            port:
+              number: 80
+  tls:
+  - hosts:
+      - console-opd2sit-r3nmo9ycuuh82cyifm.rsjitcm.com
+    secretName: rsjitcm.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fpc-opd-admin-cdn
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /fpc-opd-admin/$1
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: wwwcdn2sit.rsjitcm.com
+    http:
+      paths:
+      - path: /fpc-opd-admin/(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: fpc-opd-admin
+            port:
+              number: 80
+  tls:
+  - hosts:
+      - wwwcdn2sit.rsjitcm.com
+    secretName: rsjitcm.com
