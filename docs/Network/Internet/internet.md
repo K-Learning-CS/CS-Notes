@@ -1,5 +1,5 @@
 osi七层模型
-![](../../img/dfasdfasdfjpwjgbp0mha.png)
+![](../../imgs/dfasdfasdfjpwjgbp0mha.png)
 物理层
 1.如何使用物理信号来表示数据1和0
 2.数据传输是否可同时在两个方向上进行

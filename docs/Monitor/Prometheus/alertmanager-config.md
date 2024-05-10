@@ -1,4 +1,4 @@
-![](../../img/mvxcohaentgfahboah.png)
+![](../../imgs/mvxcohaentgfahboah.png)
 
 
 1. 从左上开始，Prometheus 发送的警报到 Alertmanager; 

@@ -3,7 +3,7 @@
 
 ## 一、架构图
 
-![image-20210628102327297](../img/WX20220225-110445@2x.png)
+![image-20210628102327297](../imgs/WX20220225-110445@2x.png)
 
 ## 二、基本流程
 
@@ -206,7 +206,7 @@ kustomize edit set image <name:versoin>
 
 
 
-![](../img/qianfan.png)
+![](../imgs/qianfan.png)
 
 ~~~bash
 # 以cmdb-rs为例
@@ -377,7 +377,7 @@ kubectl argo rollouts undo <rollout_name> --to-revision=3 # 回滚至指定版�
 
 #### 说明
 
-![image-20210701114442780](../img/image-20210701114442780.png)
+![image-20210701114442780](../imgs/image-20210701114442780.png)
 
 ~~~bash
 # rollout 带来的是更加灵活的滚动更新策略 例如灰度和蓝绿 配合上service可以完成更新过程中的流量管理

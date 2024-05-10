@@ -15,7 +15,7 @@
 
 - 从1.5版本开始将Pilot、Citadel、Galley、Mixer整合成为了istiod，这也就意味着istio服务端由一个组件组成
 
-![](../img/arch.svg)
+![](../imgs/arch.svg)
 
 
 ### 一、下载istioctl命令行工具
@@ -41,7 +41,7 @@ cp bin/istioctl /usr/local/bin/
 
 - 自定义安装参考：[官方文档](https://istio.io/latest/docs/setup/additional-setup/customize-installation/)
 
-![](../img/WX20211129-113815@2x.png)
+![](../imgs/WX20211129-113815@2x.png)
 
 ~~~bash
 1.生成生产配置

@@ -89,12 +89,12 @@ FaaS 函数即服务  功能即服务。将单个功能集成到单个函数中 
 
 ### 基本组件
 
-![](../img/QQ20210903-094535@2x.png)
+![](../imgs/QQ20210903-094535@2x.png)
 
 ### 组件工作流程图
 
 - k8s 本身就是一套微服务架构 
-![](../img/a29993b6-f2b9-4603-a9c2-c3e5b08e13ec.png)
+![](../imgs/a29993b6-f2b9-4603-a9c2-c3e5b08e13ec.png)
 
 
 ~~~bash
@@ -161,7 +161,7 @@ https://kubernetes.io/releases/version-skew-policy/
 ~~~
 
 - api version
-![](../img/QQ20210906-142328@2x.png)
+![](../imgs/QQ20210906-142328@2x.png)
 ~~~bash
 Kubernetes是一个组件众多、贡献者人数众多的大系统。Kubernetes API实际上是一个API集合，其中每个成员称作“API组（API Group”，并且每个 API 组都是独立管理版本的。API版本会有三类:
   v1	   正式发布（Generally available，GA，稳定版本）
@@ -191,10 +191,10 @@ Deployment: 无状态应用部署控制器
 
 ### 当执我们使用deployment控制器时发生了什么
 
-![image-20210727184748322.png](../img/image-20210727184748322.png)
+![image-20210727184748322.png](../imgs/image-20210727184748322.png)
 ## 四、配置规划
 
-![](../img/WX20210903-143131@2x.png)
+![](../imgs/WX20210903-143131@2x.png)
 
 ### 生产架构
 - 1.Worker Node越多越好，具体看需求量
@@ -202,7 +202,7 @@ Deployment: 无状态应用部署控制器
 - 3.多Master则需要用到Load Balance，避免Load Balance的单点故障，需要为其做高可用，两台
 - 4.ETCD为数据存储服务，数据为重中之重，必须为三台以上奇数节点，涉及到主节点选举
 
-![](../img/image-20200908095422345-1024x687.png)
+![](../imgs/image-20200908095422345-1024x687.png)
 
 推荐配置 可增可减
 
