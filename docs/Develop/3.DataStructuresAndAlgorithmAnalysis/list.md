@@ -28,4 +28,42 @@ int end = -1;  //用 end 来确定尾部，当 end 为 -1 时，列表为空
 
 # Link list
 
- 
+在`go`中我们还可以使用指针来实现
+
+首先我们定义一个结构体，这个结构体有两个域：当前节点值、指向下一个节点的指针
+
+```go
+type node struct {
+	Element  int
+	Position *node
+}
+```
+
+然后我们增加一个方法，用来插入节点
+
+```go
+func (r *node) Add(n int) {
+    temp := newNode()
+    temp.Element = n
+    
+    if r != nil {
+    temp.Position = r.Position
+    r.Position = temp
+    }
+}
+```
+
+我们构建一个链表
+
+```go
+func main() {
+    head := newNode()
+    head.Add(3)
+    head.Add(1)
+    head.Add(2)
+}
+```
+
+它的构成如下图
+
+![img.png](../../imgs/dev-dsaaa-list-1.png)
