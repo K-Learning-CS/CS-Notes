@@ -81,7 +81,7 @@ spec:
 ## 二、部署控制器
 
 ### deployment和rs及pod的关系
-![](../imgs/QQ20210910-103855@2x.png)
+![](../../imgs/QQ20210910-103855@2x.png)
 
 ~~~bash
 apiVersion: apps/v1

@@ -7,19 +7,19 @@
 
 - 单体应用
 
-![image-20210723174633255](../imgs/image-20210723174633255.png)
+![image-20210723174633255](../../imgs/image-20210723174633255.png)
 
 - 分层架构
 
-![image-20210723173800274](../imgs/image-20210723173800274.png)
+![image-20210723173800274](../../imgs/image-20210723173800274.png)
 
 - 主机虚拟化
 
-![image-20210723172457357](../imgs/image-20210723172457357.png)
+![image-20210723172457357](../../imgs/image-20210723172457357.png)
 
 - 容器虚拟化
 
-![image-20210723170638927](../imgs/image-20210723170638927.png)
+![image-20210723170638927](../../imgs/image-20210723170638927.png)
 
 ### 容器虚拟化发展
 
@@ -27,7 +27,7 @@
 
 
 
-![496a33e3defa72adfb46a1f8fa02ef68](../imgs/496a33e3defa72adfb46a1f8fa02ef68.png)
+![496a33e3defa72adfb46a1f8fa02ef68](../../imgs/496a33e3defa72adfb46a1f8fa02ef68.png)
 
 
 
@@ -168,7 +168,7 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 ### 组件构成
-![QQ20210902-092144@2x.png](../imgs/QQ20210902-092144@2x.png)
+![QQ20210902-092144@2x.png](../../imgs/QQ20210902-092144@2x.png)
 
 ```bash
 1.docker cli
@@ -383,7 +383,7 @@ docker build -t 镜像名称[:tag] .
 
 ### docker event state
 
-![img](../imgs/1227103-20200223180107809-1521310319-1024x463.png)docker的状态转换及常用命令
+![img](../../imgs/1227103-20200223180107809-1521310319-1024x463.png)docker的状态转换及常用命令
 
 ## 三、docker网络
 
@@ -393,13 +393,13 @@ docker build -t 镜像名称[:tag] .
 
 - veth设备形象的理解可以比作：两张虚拟网卡中间连着一根虚拟网线，用来连接各虚拟设备
 
-![img](../imgs/image-20200928181620514.png)
+![img](../../imgs/image-20200928181620514.png)
 
 #### 2）linux Bridge
 
 - bridge可以理解为一个虚拟交换机，提供mac转发
 
-![img](../imgs/image-20200928192408464.png)
+![img](../../imgs/image-20200928192408464.png)
 
 #### 3）iptables
 
@@ -435,14 +435,14 @@ docker build -t 镜像名称[:tag] .
 2.所有此联盟中的容器共享UTS、Network、IPC
 ```
 
-![img](../imgs/image-20200928193607345.png)
+![img](../../imgs/image-20200928193607345.png)
 
 4）host
 
 - 共享主机网络空间
 #### docker四种网络模型
 
-![img](../imgs/image-20200928170505583-1024x642.png)
+![img](../../imgs/image-20200928170505583-1024x642.png)
 
 - docker之间互联使用的是SDN类型的通信
 
@@ -554,7 +554,7 @@ CRI (Container Runtime Interface)
 
 ~~~
 ### 容器运行时的发展
-![WX20210902-151342@2x.png](../imgs/WX20210902-151342@2x.png)
+![WX20210902-151342@2x.png](../../imgs/WX20210902-151342@2x.png)
 
 ### 安全容器
 AWS在它的官方博客中是这么描述多租户在k8s中时存在安全隐患的：

@@ -51,7 +51,7 @@
 
 ## 部署流程图
 
-![WX20220225-110445@2x](../imgs/WX20220225-110445@2x.png)
+![WX20220225-110445@2x](../../imgs/WX20220225-110445@2x.png)
 
 - 在整个部署过程中分为三个大块：
   - 1）根据接入的服务，创建工单请求创建创建 apollo 项目
@@ -102,23 +102,23 @@ git checkout -b k8s_<项目简称>
 - 用 pycharm 打开 http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git 的 develop 分支
 - 双击 Shift 搜索 setting-<项目简称>.yaml
 ```
-![img.png](../imgs/sagasgsd.png)
+![img.png](../../imgs/sagasgsd.png)
 ```bash
 - 这里以nf 为例，打开 setting-nf.yaml，查看对应环境是否存在，如 integration_test 环境，如果新加环境则需要创建
 - 这里的环境以开头的为准，如 integration_test，而不是 stack_environment: integration_test
 ```
-![img.png](../imgs/afasgsbwg.png)
+![img.png](../../imgs/afasgsbwg.png)
 
 ##### 3.stackid
 ```bash
 - 用 pycharm 打开 http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git 的 develop 分支
 - 找到 init_json 目录中的 <项目简称> 目录中的 cmdb.json， 例如 init_json/nf/cmdb.json
 ```
-![img.png](../imgs/jfgsfgeh.png)
+![img.png](../../imgs/jfgsfgeh.png)
 ```bash
 - 拿到数据库连接信息后连接上 cmdb 数据库，找到 <项目简称> cmdb 中的 stack 表，即可找到对应得 stackid
 ```
-![img.png](../imgs/ghfjhjre.png)
+![img.png](../../imgs/ghfjhjre.png)
 
 ##### 4.镜像全称
 ```bash
@@ -153,14 +153,14 @@ git checkout -b k8s_<项目简称>
 - 通常为 产品代码-环境  如 dnet-int dnet-prd
 - 具体信息以部署集群为准 上述只做参考，部署至哪个集群则为哪个集群的后缀
 ```
-![img.png](../imgs/dsafsfadsf.png)
+![img.png](../../imgs/dsafsfadsf.png)
 
 ##### 2.k8s 名称空间
 ```bash
 - 此信息为部署到集群后服务所在名称空间
 - 通常为 产品代码-环境全称 如 dnet-integration-test，具体以部署目的为指向，可将多个产品部署至同一名称空间
 ```
-![img.png](../imgs/adsfasdfsg.png)
+![img.png](../../imgs/adsfasdfsg.png)
 
 ### 将信息写入 git
 
@@ -182,7 +182,7 @@ cat >> init.txt <<'EOF'
 EOF
 ```
 
-![img.png](../imgs/tyftnfrth.png)
+![img.png](../../imgs/tyftnfrth.png)
 
 ##### 2.配置分离
 ```bash
@@ -246,20 +246,20 @@ git push http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git k8s_<项目简�
 ##### 1.在argocd中创建应用
 - 打开对应环境的 jenkins，例如海鼎非生产 http://47.97.75.60:18080/ ，点击对应的 <项目简称>，例如 baas
 
-![img.png](../imgs/wgwrwyt.png)
+![img.png](../../imgs/wgwrwyt.png)
 
 - 找到后缀含有 k8s 的目录打开
 
-![img.png](../imgs/bsaghrgfsah.png)
+![img.png](../../imgs/bsaghrgfsah.png)
 
 - 打开 argocd_create_app job
 
-![img.png](../imgs/hfgjignh.png)
+![img.png](../../imgs/hfgjignh.png)
 
 - 输入 <应用名称> 并 build，等待 job 构建完成
 - 在 [argocd web 页面](https://argocd.hd123.com/dnet-int/applications) 上查看，出现类似 test 的项目即为成功
 
-![img.png](../imgs/bwetfdfb.png)
+![img.png](../../imgs/bwetfdfb.png)
 
 
 
@@ -267,7 +267,7 @@ git push http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git k8s_<项目简�
 
 - 返回 argocd_create_app job 的上级目录，打开 deploy job
 
-![img.png](../imgs/jbdsoijfhnf.png)
+![img.png](../../imgs/jbdsoijfhnf.png)
 
 - 输入 <应用名称> 并 build，等待 job 构建完成
 - 在 [argocd web 页面](https://argocd.hd123.com/dnet-int/applications) 上查看，刚创建的应用进入 Progressing 状态则 job 执行成功
@@ -278,15 +278,15 @@ git push http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git k8s_<项目简�
 ##### 1.修改版本号
 - 打开对应环境的 jenkins，例如海鼎非生产 http://47.97.75.60:18080/ ，点击对应的 <项目简称>，例如 baas
 
-![img.png](../imgs/wgwrwyt.png)
+![img.png](../../imgs/wgwrwyt.png)
 
 - 找到后缀含有 k8s 的目录打开
 
-![img.png](../imgs/bsaghrgfsah.png)
+![img.png](../../imgs/bsaghrgfsah.png)
 
 - 打开 modify_version 的 job
 
-![img.png](../imgs/kjbopdfwsamg.png)
+![img.png](../../imgs/kjbopdfwsamg.png)
 
 - 点击参数构建，填入 版本:iamge 开始构建，多个以 ';' 作为分隔，执行完成则构建成功
 - 修改镜像版本实质上是修改 git 中的 k8s 配置
@@ -298,22 +298,22 @@ git push http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git k8s_<项目简�
 - 双击 Shift 搜索 setting-<项目简称>-patch.yaml
 - 找到对应的环境，即可检查应用版本是否更新完成
 ```
-![img.png](../imgs/amsoivbnsadfg.png)
+![img.png](../../imgs/amsoivbnsadfg.png)
 
 ##### 2.升级数据库版本
 
 - 返回 modify_version job 的上级目录，打开 deploy_rdb job
 
-![img.png](../imgs/bjfonsdg.png)
+![img.png](../../imgs/bjfonsdg.png)
 
 - 输入 <应用名称> 并 build，等待 job 构建完成
 - 查看 dbinit_log 中的日志信息，是否更新为新版本
 
-![img.png](../imgs/ahioghdafg.png)
+![img.png](../../imgs/ahioghdafg.png)
 
 - Target Version 为之前修改的版本且执行完成，则更新成功
 
-![img.png](../imgs/hfaisogna.png)
+![img.png](../../imgs/hfaisogna.png)
 
 
 
@@ -321,7 +321,7 @@ git push http://gitlab.app.hd123.cn:10080/qianfanops/toolset.git k8s_<项目简�
 
 - 返回 argocd_create_app job 的上级目录，打开 deploy job
 
-![img.png](../imgs/jbdsoijfhnf.png)
+![img.png](../../imgs/jbdsoijfhnf.png)
 
 - 输入 <应用名称> 并 build，等待 job 构建完成
 - 在 [argocd web 页面](https://argocd.hd123.com/dnet-int/applications) 上查看，刚更新的应用进入 Progressing 状态则 job 执行成功

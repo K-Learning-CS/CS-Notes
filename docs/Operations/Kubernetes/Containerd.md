@@ -35,7 +35,7 @@ DESCRIPTION:
 
 ctr is an unsupported debug and administrative client for interacting
 with the containerd daemon. Because it is unsupported, the commands,
-options, and operations are not guaranteed to be backward compatible or
+options, and Operations are not guaranteed to be backward compatible or
 stable from release to release of the containerd project.
 
 COMMANDS:

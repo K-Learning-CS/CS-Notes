@@ -40,7 +40,7 @@ istioctl kube-inject -f test.yaml | kubectl apply -f -
 
 ### 三、流量对比
 
-![](../imgs/WX20211129-150945@2x.png)
+![](../../imgs/WX20211129-150945@2x.png)
 
 - 由于服务网格对网络的管理有更加细粒度的配置，所以服务网格能够实现的功能也更加多样
 
