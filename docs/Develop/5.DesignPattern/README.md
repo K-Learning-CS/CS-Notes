@@ -70,3 +70,11 @@
 ### 总结
 
 设计模式的意义在于提供了一套经过验证的解决方案，帮助开发人员应对常见的软件设计问题和挑战。通过使用设计模式，可以提高代码的重用性、可维护性和灵活性，促进团队协作，并提升整体的开发效率和软件质量。
+
+### 参考文档：
+
+简要了解
+[efactoringguru](https://refactoringguru.cn/design-patterns/catalog)
+
+专业书
+[设计模式](https://book.douban.com/subject/1052241/)
