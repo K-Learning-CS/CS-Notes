@@ -117,5 +117,118 @@ int isAsciiDigit(int x) {
     x = !((x & 0xc) ^ 0xc); // 排除11开头的 cdef
   return !(x+y+z);
 }
+/* 
+ * conditional - same as x ? y : z 
+ *   Example: conditional(2,4,5) = 4
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 16
+ *   Rating: 3
+ */
+int conditional(int x, int y, int z) {
+    // 根据x来控制 y z 的表达 当 x 为真时 ~(~!x+1) = 0xffffffff  ~!x+1 = 0x00000000
+    // x 为假时则相反
+    y=~(~!x+1)&y;
+    z=(~!x+1)&z;
+  return y+z;
+}
+/* 
+ * isLessOrEqual - if x <= y  then return 1, else return 0 
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 24
+ *   Rating: 3
+ */
+int isLessOrEqual(int x, int y) {
+//    错误思路
+//    int i = x ^ y;
+//    int j;
+//    int z=0x1<<31;
+//    i = i & (~z);
+//    i |= (i >> 1);
+//    i |= (i >> 2);
+//    i |= (i >> 4);
+//    i |= (i >> 8);
+//    i |= (i >> 16);
+//    j = i & (~i >> 1);
+//    y = (y & z) & (~(x & z));
+//    x = x & j;
+//
+//
+//  return !(x+y);
+/* (y >=0 && x <0) || ((x * y >= 0) && (y + (-x) >= 0)) */
+    int signX = (x >> 31) & 1;
+    int signY = (y >> 31) & 1;
+    int signXSubY = ((y + ~x + 1) >> 31) & 1;
+    return (signX & ~signY) | (!(signX ^ signY) & !signXSubY);
+}
+//4
+/* 
+ * logicalNeg - implement the ! operator, using all of 
+ *              the legal operators except !
+ *   Examples: logicalNeg(3) = 0, logicalNeg(0) = 1
+ *   Legal ops: ~ & ^ | + << >>
+ *   Max ops: 12
+ *   Rating: 4 
+ */
+int logicalNeg(int x) {
+// 解1
+    // 用x的最高位往下补充，如果x有值，那么最低位一定为1
+    //    x |= (x >> 1);
+    //    x |= (x >> 2);
+    //    x |= (x >> 4);
+    //    x |= (x >> 8);
+    //    x |= (x >> 16);
+    // 如果x最低位为1则返回0，为零则返回1
+    //  return (x&0x1)^0x1;
+// 解2
+    // if x < 0 ;sign = 1
+    int sign = (x >> 31) & 1;
+    // TMAX = 0x7fffffff
+    int TMAX = ~(1 << 31);
+    // if x < 0 return 0;elif x!=0; (x + TMAX) >> 31) = 1
+    return (sign ^ 1) & ((((x + TMAX) >> 31) & 1) ^ 1);
+}
+/* howManyBits - return the minimum number of bits required to represent x in
+ *             two's complement
+ *  Examples: howManyBits(12) = 5
+ *            howManyBits(298) = 10
+ *            howManyBits(-5) = 4
+ *            howManyBits(0)  = 1
+ *            howManyBits(-1) = 1
+ *            howManyBits(0x80000000) = 32
+ *  Legal ops: ! ~ & ^ | + << >>
+ *  Max ops: 90
+ *  Rating: 4
+ */
+int howManyBits(int x) {
+//    // 确定正负
+//    int sign = x >> 31;
+//    //根据正负对x进行处理 将x转换为正数
+//    int unsignX =  ~sign & (~x + 1) | x;
+//    // 从0x70000000开始位移并计数  计算log2x
+//    int n = 0;
+//
+//  return sign + n;
+    int sign, b16, b8, b4, b2, b1, b0;
+    sign = x >> 31;
+    x = (sign & ~x) | (~sign & x); // 如果x是负数，取反，正数不变
+    // x >> 16 将 x 右移 16 位，丢弃掉低 16 位，保留高 16 位。如果高 16 位中有 1，结果将非零
+    // !! 将结果转换为0 或者 1
+    // << 4 将b16根据是否有1赋值为10000或者00000
+    b16 = !!(x >> 16) << 4;
+    // 根据b16的值选择是否丢弃掉低16位
+    x = x >> b16;
+    b8 = !!(x >> 8) << 3;
+    x = x >> b8;
+    b4 = !!(x >> 4) << 2;
+    x = x >> b4;
+    b2 = !!(x >> 2) << 1;
+    x = x >> b2;
+    b1 = !!(x >> 1);
+    x = x >> b1;
+    b0 = x;
+
+    return b16 + b8 + b4 + b2 + b1 + b0 + 1;
+}
 ```
 
