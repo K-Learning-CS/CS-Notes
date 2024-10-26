@@ -1,6 +1,10 @@
 # filebeat
 
-[官方文档](https://www.elastic.co/guide/en/beats/filebeat/current/index.html)
+version: 7.17
+
+reference:
+
+- [官方文档](https://www.elastic.co/guide/en/beats/filebeat/current/index.html)
 
 
 ## 名词
@@ -31,7 +35,7 @@ Filebeat 由两个主要组件组成：
 细节参考官方文档，有三种配置的方式：
 
 - 数据收集模块——简化常见日志格式的收集、解析和可视化
-- ECS 记录器 — 将应用程序日志结构化并格式化为与 ECS 兼容的 JSON
+- ECS记录器 将应用程序日志结构化并格式化为与 ECS 兼容的 JSON
 - 手动 Filebeat 配置
 
 ### 手动配置
@@ -95,3 +99,9 @@ http: # filebeat的http页面
 ```
 
 *使用此配置，filebeat 将为`/logs/app_log/`目录中所有以`.log`结尾的文件启动一个收割机，为匹配的所有行都加上两个自定义字段。在输出部分 filebeat 将以`hospital_prd_applog`作为`topic`向 kafka 队列中输出数据，不存在则创建。*
+
+### 检查配置
+
+```shell
+./filebeat test config -c filebeat-kafka.yaml
+```
