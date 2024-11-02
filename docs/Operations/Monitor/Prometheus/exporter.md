@@ -172,7 +172,7 @@ cat > .my.cnf <<EOF
 [client]
 user='root'
 password='66666666'
-host='localhost'
+host='127.0.0.1'
 port='3306'
 EOF
 
@@ -196,7 +196,7 @@ docker run -d \
  quay.io/prometheuscommunity/elasticsearch-exporter:latest \
  --es.uri=http://elastic:M2ZjBkN2Z@192.168.1.130:9200 \
  --es.all --es.indices --es.indices_settings \
- --es.indices_mappings --es.shards --es.snapshots --es.timeout=30s
+ --es.indices_mappings --es.shards  --es.timeout=30s
 ```
 
 ### redis-exporter
