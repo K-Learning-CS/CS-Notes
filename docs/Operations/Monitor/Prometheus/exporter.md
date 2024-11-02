@@ -172,7 +172,7 @@ cat > .my.cnf <<EOF
 [client]
 user='root'
 password='66666666'
-host='192.168.1.81'
+host='localhost'
 port='3306'
 EOF
 
